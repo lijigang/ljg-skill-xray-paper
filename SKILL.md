@@ -63,12 +63,23 @@ user_invocable: true
 
 使用纯 ASCII 字符（仅用 +, -, |, >, <, /, \, *, =, . 等基础符号）绘制论文核心逻辑流程。
 
-### 步骤 5：生成 Org 报告
+### 步骤 5：检查系统环境并选择输出格式
 
-使用 Write 工具，按以下模板生成 org-mode 文件。要求：
+首先，检查系统中是否安装了 emacs，以决定输出格式：
+
+1. 使用 Bash 执行 `command -v emacs >/dev/null 2>&1` 检查 emacs 是否可用
+2. 根据检查结果设置输出格式：
+   - 如果 emacs 存在（命令返回 0）：使用 org-mode 格式
+   - 如果 emacs 不存在（命令返回非 0）：使用 markdown 格式
+
+### 步骤 6：生成报告
+
+根据步骤 5 的检查结果，使用 Write 工具按相应模板生成文件。要求：
 - 文字精确、简练、清晰
 - 使用自然段落，不使用表格
 - ASCII 图形仅用纯 ASCII 基础符号，不用 Unicode
+
+#### Org-mode 模板（当 emacs 存在时）
 
 ```org
 #+title:      xray-{简短标题}
@@ -134,14 +145,85 @@ user_invocable: true
 #+end_example
 ```
 
-### 步骤 6：保存并打开
+#### Markdown 模板（当 emacs 不存在时）
+
+```markdown
+# xray-{简短标题}
+
+**Date**: {YYYY-MM-DD Day HH:MM}
+**Source**: {论文链接}
+**Authors**: {作者}
+**Venue**: {会议/期刊}
+**Tags**: read, xray, paper
+**Identifier**: {YYYYMMDDTHHMMSS}
+
+## NAPKIN FORMULA
+
+```
++----------------------------------------------------------+
+|                                                          |
+|   {餐巾纸公式}                                            |
+|                                                          |
++----------------------------------------------------------+
+```
+
+{一句话解释公式含义}
+
+## PROBLEM
+
+**痛点定义**: {一句话定义问题}
+
+**前人困境**: {为什么之前解决不了}
+
+## INSIGHT
+
+**核心直觉**: {作者的灵光一闪，用最直白的语言}
+
+**关键步骤**:
+1. {神来之笔1}
+2. {神来之笔2}
+
+## DELTA
+
+**vs SOTA**: {相比当前最佳的具体提升}
+
+**新拼图**: {为人类知识库增加了什么}
+
+## CRITIQUE
+
+**隐形假设**:
+- {假设1}
+- {假设2}
+
+**未解之谜**:
+- {遗留问题1}
+- {遗留问题2}
+
+## LOGIC FLOW
+
+```
+{纯 ASCII 逻辑结构图: 问题 --> 洞见 --> 方法 --> 结果}
+```
+
+## NAPKIN SKETCH
+
+```
+{餐巾纸图: 用 ASCII 绘制核心概念}
+```
+```
+
+### 步骤 7：保存并打开
 
 1. 生成时间戳：使用 Bash 执行 `date +%Y%m%dT%H%M%S` 获取当前时间
-2. 文件名格式（denote 规范）：`{时间戳}--xray-{简短标题}__read.org`
+2. 根据步骤 5 的检查结果确定文件扩展名：
+   - 如果使用 org-mode 格式：扩展名为 `.org`
+   - 如果使用 markdown 格式：扩展名为 `.md`
+3. 文件名格式（denote 规范）：`{时间戳}--xray-{简短标题}__read.{扩展名}`
    - 简短标题：取论文标题前 3-5 个关键词，小写，用连字符连接
-   - 示例：`20260207T171500--xray-dflash-block-diffusion__read.org`
-3. 保存路径：`~/Documents/notes/{文件名}`
-4. 使用 Bash 执行：`open ~/Documents/notes/{文件名}`
+   - 示例（org）：`20260207T171500--xray-dflash-block-diffusion__read.org`
+   - 示例（markdown）：`20260207T171500--xray-dflash-block-diffusion__read.md`
+4. 保存路径：`~/Documents/notes/{文件名}`
+5. 使用 Bash 执行：`open ~/Documents/notes/{文件名}`
 
 ## 输出质量标准
 
