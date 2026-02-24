@@ -1,16 +1,14 @@
 # ljg-skill-xray-paper
 
-论文X光机 (Paper X-Ray Scanner) — 一个 [Claude Code](https://docs.anthropic.com/en/docs/claude-code) Skill，解构学术论文，穿透学术黑话，还原作者最底层的逻辑模型。
+论文 X 光机 — 一个 [Claude Code](https://docs.anthropic.com/en/docs/claude-code) Skill，只做两件事：论文说了什么 + 对我意味着什么。
 
 ## 功能
 
-- 支持 PDF 路径、文本内容或论文链接输入
-- 认知提取算法：去噪 → 提取 → 批判
-- 大白话开场：10 秒内决定要不要继续读
-- Introduction 概览图：领域时间线 + 本文定位
-- 五维分析：核心痛点、解题机制、创新增量、批判性边界、餐巾纸公式
-- 自包含输出：禁止裸公式，术语即用即释
-- 生成 Org-mode 格式报告，含 ASCII 逻辑流程图
+- 支持 arxiv ID、URL、PDF 路径等多种输入
+- 零术语规则：承重概念必须场景化，去掉技术名字仍能理解
+- 认知卡片：ASCII art 直观展示论文洞见与个人认知的碰撞
+- 诚实原则：delta = 0 就说 0，不造空卡片
+- 生成 Org-mode 格式报告，自带模板
 
 ## 安装
 
@@ -24,22 +22,16 @@
 在 Claude Code 中输入：
 
 ```
-/ljg-xray-paper <论文PDF路径、URL或粘贴内容>
+/ljg-xray-paper <arxiv ID、论文URL或PDF路径>
 ```
 
 ## 输出示例
 
 生成的 Org-mode 报告包含：
 
-- **PLAIN TALK** — 大白话开场，外行能听懂的 2-3 句话
-- **LANDSCAPE** — ASCII 概览图：历史时间线 + 本文位置
-- **NAPKIN FORMULA** — 餐巾纸公式，一句话浓缩核心
-- **PROBLEM** — 痛点定义与前人困境
-- **INSIGHT** — 作者的灵光一闪
-- **DELTA** — 相比 SOTA 的创新增量
-- **CRITIQUE** — 隐形假设与未解之谜
-- **LOGIC FLOW** — ASCII 逻辑结构图
-- **NAPKIN SKETCH** — ASCII 餐巾纸图
+- **论文说了什么** — 问题、视角、结果（人话），配餐巾纸图
+- **对我意味着什么** — 认知卡片（ASCII art），每张附金句级启发
+- **追问** — 推测性 claim 或锐利问题（有则写，无则省）
 
 ## License
 
